@@ -56,10 +56,8 @@ public class MainActivity extends Activity {
 	            	String curTime;
 	            	if(isUpdate){
 	            		settingNewClock();
-	            		//curTime =hor+ hora + min + minuto + sec + segundo;
 	            	} else {
 	            		updateTime();
-	            		
 	            	}
 	            	curTime =hor+ hora + min + minuto + sec + segundo;
 	            	tHora.setText(curTime);
