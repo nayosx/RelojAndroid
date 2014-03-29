@@ -77,12 +77,12 @@ public class Ajustes extends Activity {
 			}else{
 				getHora.setText(horaParse);
 				mensaje("Minutos no validos", 1);
-				isOK=false;
+				//isOK=false;
 			}
 		}else{
 			getHora.setText(horaParse);
 			mensaje("Hora no valida", 1);
-			isOK=false;
+			//isOK=false;
 		}
 		return isOK;
 	}
