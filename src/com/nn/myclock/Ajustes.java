@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 public class Ajustes extends Activity {
 
-	Button bok, bcan;
 	EditText getHora;
 	Intent i;
 	int hora, minuto, segundo;
@@ -25,9 +24,9 @@ public class Ajustes extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ajustes);
 		
-		bok = (Button) findViewById(R.id.bOK);
-		bcan = (Button) findViewById(R.id.bCancel);
 		getHora = (EditText) findViewById(R.id.eHora);
+		Bundle bl = this.getIntent().getExtras();
+		getHora.setText(bl.getString(S.FULL_TIME));
 	}
 	
 	

@@ -1,7 +1,6 @@
 package com.nn.myclock;
 
-//import java.util.Calendar;
-import java.util.Date;
+import java.util.Calendar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,14 +19,17 @@ public class MainActivity extends Activity {
 	boolean isUpdate = false;
 	String sec, min, hor;
 	
+	String curTime;
+	
 	//Calendar c = Calendar.getInstance();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_main);
 		tHora = (TextView) findViewById(R.id.tClock);
+		
+		
 	    r = new RefreshClock();
 	    iniReloj= new Thread(r);   
 	    iniReloj.start();
@@ -36,7 +38,8 @@ public class MainActivity extends Activity {
 	
 	public void ajuste(View v){
 		i = new Intent(this, Ajustes.class);
-
+		i.putExtra(S.FULL_TIME, curTime);
+		
         // hay una clase llamada S, que se encarga de contener var estaticas como AJUSTES
 		this.startActivityForResult(i, S.AJUSTES);
 	}
@@ -53,7 +56,7 @@ public class MainActivity extends Activity {
 	    runOnUiThread(new Runnable() {
 	        public void run() {
 	            try{
-	            	String curTime;
+	            	
 	            	if(isUpdate){
 	            		settingNewClock();
 	            	} else {
@@ -96,36 +99,17 @@ public class MainActivity extends Activity {
 
     /**
     Este es el metodo inicial del reloj, a partir de el es que se muestra la hora
-    por alguna extraña razon no le gusta que usemos calendar para actualizar la hora
-    cada segundo, pero por eso esta una clase alternativa llamada Date que pertenece 
-    a Java.Util.Date 
-    
-    De ella hay dos variante una la que muestro y otra que pueden investigar por 
-    su cuenta.
-    
-    La advetencia @SuppressWarnings("deprecation") es por el hecho de que dicha clase  
-    (estoy hablando de la clase Date)
-    esta por ser depreciable, quizas asi lo toma android, quizas sea cierto, pero igual 
-    no afecta en nada, son de esas clases que se tienen que heredar durante largo
-    tiempo ya que si desaparece de un dia para otro en el SDK de Java, afectaria a muchos 
-    sistemas que hacen uso de ella
+    cada segundo es la encargada Java.Util.Calendar
 
-    Simplemente no se asusten porque el eclipse se las tacha
     */
-	@SuppressWarnings("deprecation")
+	
 	private void updateTime(){
-		Date dt = new Date();
 		
-        hora = dt.getHours();
-        minuto = dt.getMinutes();
-        segundo = dt.getSeconds();
-        setZeroClock();
-		
-		/*
+		Calendar c = Calendar.getInstance();
 		hora = c.get(Calendar.HOUR_OF_DAY);
 		minuto = c.get(Calendar.MINUTE);
 		segundo = c.get(Calendar.SECOND);
-		*/
+		setZeroClock();
 		
 	}
 	/**
